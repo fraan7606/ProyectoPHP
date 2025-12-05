@@ -1,0 +1,84 @@
+@startuml Diagrama Inicial - Blog
+
+' Diagrama de clases inicial (planificación)
+
+class Database {
+  - instance: Database
+  - connection: PDO
+  - __construct()
+  + getInstance(): Database
+  + getConnection(): PDO
+}
+
+class User {
+  - db: PDO
+  - id: int
+  - username: string
+  - email: string
+  - password: string
+  + __construct()
+  + register(username, email, password): array
+  + login(username, password): array
+  + findById(id): array
+  + getId(): int
+  + getUsername(): string
+  + getEmail(): string
+}
+
+class Post {
+  - db: PDO
+  - id: int
+  - userId: int
+  - title: string
+  - content: string
+  - image: string
+  + __construct()
+  + create(userId, title, content, image): array
+  + update(id, title, content, image): array
+  + delete(id): array
+  + getAll(): array
+  + findById(id): array
+  + getByUser(userId): array
+  + isOwner(postId, userId): bool
+}
+
+class AuthController {
+  + login(): void
+  + register(): void
+  + logout(): void
+}
+
+class PostController {
+  + create(): void
+  + update(id): void
+  + delete(id): void
+  - uploadImage(file): string
+}
+
+class HomeController {
+  + index(): array
+}
+
+Database "1" -- "*" User : usa
+Database "1" -- "*" Post : usa
+User "1" -- "*" Post : tiene
+AuthController ..> User : usa
+PostController ..> Post : usa
+HomeController ..> Post : usa
+
+note right of Database
+  Patrón Singleton
+  Gestiona conexión PDO
+end note
+
+note right of User
+  Autenticación segura
+  password_hash/verify
+end note
+
+note right of Post
+  CRUD completo
+  Validación de datos
+end note
+
+@enduml

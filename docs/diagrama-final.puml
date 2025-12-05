@@ -1,0 +1,129 @@
+@startuml Diagrama Final - Blog
+
+' Diagrama de clases final (implementación real)
+
+class Database {
+  - {static} instance: Database
+  - connection: PDO
+  - __construct()
+  + {static} getInstance(): Database
+  + getConnection(): PDO
+  - __clone()
+}
+
+class User {
+  - db: PDO
+  - id: int
+  - username: string
+  - email: string
+  + __construct()
+  + register(username: string, email: string, password: string): array
+  + login(username: string, password: string): array
+  + findById(id: int): array
+  + getId(): int
+  + getUsername(): string
+  + getEmail(): string
+}
+
+class Post {
+  - db: PDO
+  + __construct()
+  + create(userId: int, title: string, content: string, image: string): array
+  + update(id: int, title: string, content: string, image: string): array
+  + delete(id: int): array
+  + getAll(): array
+  + findById(id: int): array
+  + getByUser(userId: int): array
+  + isOwner(postId: int, userId: int): bool
+}
+
+class AuthController {
+  + {static} login(): void
+  + {static} register(): void
+  + {static} logout(): void
+}
+
+class PostController {
+  + {static} create(): void
+  + {static} update(id: int): void
+  + {static} delete(id: int): void
+  - {static} uploadImage(file: array): string|false
+}
+
+class HomeController {
+  + {static} index(): array
+}
+
+package "Views" {
+  class home.php
+  class login.php
+  class register.php
+  class "post/index.php" as postIndex
+  class "post/show.php" as postShow
+  class "post/create.php" as postCreate
+  class "post/edit.php" as postEdit
+}
+
+package "Router" {
+  class index.php {
+    + Maneja rutas
+    + Autoload de clases
+    + Gestión de sesiones
+  }
+}
+
+Database "1" -- "*" User : << usa >>
+Database "1" -- "*" Post : << usa >>
+User "1" -- "0..*" Post : << crea >>
+AuthController ..> User : << usa >>
+PostController ..> Post : << usa >>
+HomeController ..> Post : << usa >>
+
+index.php ..> AuthController : << invoca >>
+index.php ..> PostController : << invoca >>
+index.php ..> HomeController : << invoca >>
+
+AuthController ..> login.php : << renderiza >>
+AuthController ..> register.php : << renderiza >>
+PostController ..> postCreate : << renderiza >>
+PostController ..> postEdit : << renderiza >>
+HomeController ..> home.php : << renderiza >>
+
+note right of Database
+  <b>Patrón Singleton</b>
+  - Una única instancia
+  - Conexión PDO centralizada
+  - Previene clonación
+end note
+
+note right of User
+  <b>Seguridad</b>
+  - password_hash() para guardar
+  - password_verify() para login
+  - Validación de email y username
+end note
+
+note right of Post
+  <b>CRUD Completo</b>
+  - Sentencias preparadas PDO
+  - Validación de datos
+  - Gestión de imágenes
+  - Control de permisos
+end note
+
+note left of AuthController
+  <b>Gestión de sesiones</b>
+  - $_SESSION para usuario
+  - Redirecciones seguras
+  - Mensajes flash
+end note
+
+note bottom of PostController
+  <b>Subida de archivos</b>
+  - Validación tipo MIME
+  - Límite de tamaño (5MB)
+  - Nombres únicos
+  - Almacenamiento seguro
+end note
+
+@enduml
