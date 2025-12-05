@@ -2,7 +2,7 @@
 
 Blog desarrollado con PHP orientado a objetos, implementando un sistema CRUD completo con autenticación de usuarios y gestión de publicaciones.
 
-## 🚀 Características
+ Características
 
 - **Sistema de autenticación** - Registro e inicio de sesión seguro con hash de contraseñas
 - **CRUD de publicaciones** - Crear, leer, actualizar y eliminar posts
@@ -11,14 +11,14 @@ Blog desarrollado con PHP orientado a objetos, implementando un sistema CRUD com
 - **Programación Orientada a Objetos** - Código estructurado y mantenible
 - **Seguridad** - PDO con sentencias preparadas, validación de datos, protección XSS
 
-## 📋 Requisitos
+ Requisitos
 
 - PHP 7.4 o superior
 - MySQL 5.7 o superior
 - Servidor web Apache (XAMPP, WAMP, LAMP, etc.)
 - Extensión PDO de PHP habilitada
 
-## 🛠️ Instalación
+Instalación
 
 1. **Clonar o descargar el proyecto** en la carpeta de tu servidor web:
    ```
@@ -48,7 +48,7 @@ Blog desarrollado con PHP orientado a objetos, implementando un sistema CRUD com
    http://localhost/Blog/public/
    ```
 
-## 📁 Estructura del Proyecto
+Estructura del Proyecto
 
 ```
 Blog/
@@ -69,28 +69,28 @@ Blog/
 └── database.sql        # Script de base de datos
 ```
 
-## 💻 Uso
+ Uso
 
-### Registro de usuario
+ Registro de usuario
 1. Ve a `/register`
 2. Completa el formulario con tus datos
 3. La contraseña será encriptada automáticamente
 
-### Iniciar sesión
+ Iniciar sesión
 1. Ve a `/login`
 2. Ingresa tu usuario y contraseña
 
-### Crear una publicación
+ Crear una publicación
 1. Inicia sesión
 2. Haz clic en "Crear Post" en el menú
 3. Completa el título, contenido y opcionalmente sube una imagen
 4. Haz clic en "Publicar"
 
-### Editar/Eliminar publicaciones
+Editar/Eliminar publicaciones
 - Solo puedes editar o eliminar tus propias publicaciones
 - Los botones aparecen dentro de cada post que hayas creado
 
-## 🔐 Seguridad Implementada
+ Seguridad Implementada
 
 - **Password hashing** - `password_hash()` y `password_verify()`
 - **Sentencias preparadas PDO** - Prevención de inyección SQL
@@ -99,16 +99,16 @@ Blog/
 - **Validación de archivos** - Verificación de tipo y tamaño de imágenes
 - **Protección XSS** - Escape de datos en vistas
 
-## 🗃️ Base de Datos
+ Base de Datos
 
-### Tabla `users`
+Tabla `users`
 - `id` - ID único del usuario
 - `username` - Nombre de usuario (único)
 - `email` - Correo electrónico (único)
 - `password` - Contraseña hasheada
 - `created_at` - Fecha de registro
 
-### Tabla `posts`
+Tabla `posts`
 - `id` - ID único del post
 - `user_id` - ID del autor (FK a users)
 - `title` - Título del post
@@ -117,7 +117,7 @@ Blog/
 - `created_at` - Fecha de creación
 - `updated_at` - Fecha de última actualización
 
-## 🎨 Tecnologías Utilizadas
+Tecnologías Utilizadas
 
 - **Backend**: PHP 7.4+
 - **Base de datos**: MySQL
@@ -125,7 +125,7 @@ Blog/
 - **Arquitectura**: MVC (Model-View-Controller)
 - **Patrón de diseño**: Singleton (conexión a BD)
 
-## 📝 Conceptos Aplicados
+Conceptos Aplicados
 
 - Programación Orientada a Objetos (POO)
 - Namespaces en PHP
@@ -137,10 +137,5 @@ Blog/
 - Subida y validación de archivos
 - CRUD completo
 
-## 👤 Autor
+Desarrollado por Fran como proyecto educativo para el Grado de Desarrollo de Aplicaciones Multiplataforma (DAM).
 
-Desarrollado como proyecto educativo para el Grado de Desarrollo de Aplicaciones Multiplataforma (DAM).
-
-## 📄 Licencia
-
-Este proyecto es de código abierto y está disponible para fines educativos.
